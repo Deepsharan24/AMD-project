@@ -1,55 +1,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+:root {
+    --bg-dark: #050505;
+    --neon-blue: #0ff;
+    --neon-blue-dim: rgba(0, 255, 255, 0.2);
+    --neon-pink: #f0f;
+    --neon-purple: #80f;
+}
+
 body {
-    background-color: #2c3e50;
+    background-color: #000;
+    background-image: 
+        linear-gradient(var(--neon-blue-dim) 1px, transparent 1px),
+        linear-gradient(90deg, var(--neon-blue-dim) 1px, transparent 1px);
+    background-size: 40px 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     font-family: 'Press Start 2P', monospace;
-    touch-action: none; /* Prevent zooming on mobile */
+    touch-action: none;
 }
 
 .phone-frame {
-    background-color: #444;
-    border-radius: 30px;
+    background-color: #111;
+    border-radius: 10px;
     padding: 30px 20px;
     box-shadow: 
-        inset -5px -5px 15px rgba(0,0,0,0.5),
-        inset 5px 5px 15px rgba(255,255,255,0.1),
-        0 15px 35px rgba(0,0,0,0.6);
-    border: 2px solid #222;
+        0 0 20px var(--neon-blue-dim),
+        inset 0 0 10px #000;
+    border: 2px solid var(--neon-blue);
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+}
+
+/* Tron-style glowing circuitry lines on the frame */
+.phone-frame::before {
+    content: "";
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 1px solid var(--neon-blue-dim);
+    pointer-events: none;
+    border-radius: 5px;
 }
 
 .brand {
-    color: #888;
-    font-size: 10px;
+    color: var(--neon-blue);
+    font-size: 14px;
     margin-bottom: 15px;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
 }
 
 .screen-bezel {
-    background-color: #111;
+    background-color: #000;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 30px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue-dim);
 }
 
 .screen {
-    background-color: #879b76; /* Classic Nokia green background */
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+    background-color: var(--bg-dark);
     position: relative;
     width: 240px;
     overflow: hidden;
-    border: 2px solid #556b46;
+    border: 1px solid var(--neon-blue);
+    box-shadow: inset 0 0 20px var(--neon-blue-dim);
 }
 
-/* CRT/LCD effect */
+/* Scanline effect */
 .screen::after {
     content: "";
     position: absolute;
@@ -58,8 +82,8 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        rgba(18, 16, 16, 0) 50%,
-        rgba(0, 0, 0, 0.1) 50%
+        rgba(0, 255, 255, 0.05) 50%,
+        rgba(0, 0, 0, 0.2) 50%
     );
     background-size: 100% 4px;
     pointer-events: none;
@@ -70,9 +94,10 @@ body {
     justify-content: space-between;
     padding: 5px 10px;
     font-size: 8px;
-    color: #1e2618;
-    border-bottom: 2px solid #556b46;
-    background-color: rgba(135, 155, 118, 0.8);
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+    border-bottom: 1px solid var(--neon-blue);
+    background-color: rgba(0, 0, 0, 0.8);
     position: absolute;
     top: 0;
     left: 0;
@@ -82,7 +107,7 @@ body {
 
 canvas {
     display: block;
-    margin-top: 20px; /* Space for scoreboard */
+    margin-top: 20px;
 }
 
 #game-over {
@@ -91,14 +116,17 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(135, 155, 118, 0.9);
+    background-color: rgba(0, 0, 0, 0.85);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #1e2618;
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
     text-align: center;
     z-index: 20;
+    border: 2px solid var(--neon-pink);
+    box-sizing: border-box;
 }
 
 #game-over.hidden {
@@ -114,6 +142,8 @@ canvas {
 #game-over p {
     font-size: 8px;
     line-height: 1.5;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
 }
 
 @keyframes blink {
@@ -140,13 +170,14 @@ canvas {
 }
 
 .btn {
-    background-color: #d1d5db;
-    border: none;
-    border-radius: 5px;
+    background-color: #000;
+    border: 1px solid var(--neon-blue);
+    border-radius: 2px;
     padding: 15px;
     font-size: 12px;
-    color: #333;
-    box-shadow: 0 4px 0 #9ca3af, inset 0 2px 2px rgba(255,255,255,0.8);
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue-dim), inset 0 0 5px var(--neon-blue-dim);
     cursor: pointer;
     font-family: 'Press Start 2P', monospace;
     user-select: none;
@@ -159,16 +190,20 @@ canvas {
 }
 
 .btn:active {
-    box-shadow: 0 0 0 #9ca3af, inset 0 2px 5px rgba(0,0,0,0.2);
-    transform: translateY(4px);
+    background-color: var(--neon-blue-dim);
+    box-shadow: 0 0 15px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+    color: #fff;
 }
 
 .btn.ok {
     border-radius: 50%;
-    background-color: #9ca3af;
-    color: white;
-    box-shadow: 0 4px 0 #6b7280, inset 0 2px 2px rgba(255,255,255,0.4);
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink);
+    box-shadow: 0 0 10px rgba(255,0,255,0.2), inset 0 0 5px rgba(255,0,255,0.2);
 }
 .btn.ok:active {
-    box-shadow: 0 0 0 #6b7280, inset 0 2px 5px rgba(0,0,0,0.3);
+    background-color: rgba(255,0,255,0.2);
+    box-shadow: 0 0 15px var(--neon-pink), inset 0 0 10px var(--neon-pink);
+    color: #fff;
 }
