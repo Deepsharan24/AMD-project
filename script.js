@@ -193,7 +193,18 @@ function draw() {
     ctx.shadowColor = colorSnake;
     for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = i === 0 ? colorSnakeHead : colorSnake;
-        ctx.fillRect(snake[i].x * gridSize + 1, snake[i].y * gridSize + 1, gridSize - 2, gridSize - 2);
+        if (i === 0) {
+            ctx.beginPath();
+            ctx.arc(
+                snake[i].x * gridSize + gridSize / 2, 
+                snake[i].y * gridSize + gridSize / 2, 
+                gridSize / 2 + 2, 
+                0, 2 * Math.PI
+            );
+            ctx.fill();
+        } else {
+            ctx.fillRect(snake[i].x * gridSize + 1, snake[i].y * gridSize + 1, gridSize - 2, gridSize - 2);
+        }
     }
     
     // Reset glow for performance
