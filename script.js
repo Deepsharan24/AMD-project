@@ -98,16 +98,7 @@ function startGameLoop() {
 
 function generateObstacles() {
     obstacles = [];
-    const numObstacles = 8; // Adjust amount of walls
-    for(let i=0; i<numObstacles; i++) {
-        let obsX = Math.floor(Math.random() * tileCount);
-        let obsY = Math.floor(Math.random() * (canvas.height / gridSize - 2)) + 2;
-        
-        // Don't spawn on snake starting position
-        if (obsY === 15 && (obsX >= 5 && obsX <= 15)) continue;
-        
-        obstacles.push({x: obsX, y: obsY});
-    }
+    // Obstacles removed as requested
 }
 
 function spawnFood() {
